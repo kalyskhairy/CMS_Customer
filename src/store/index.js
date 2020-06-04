@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-const baseUrl = 'http://localhost:3000/'
+const baseUrl = 'https://lit-badlands-37387.herokuapp.com/'
 
 Vue.use(Vuex)
 
@@ -11,7 +11,8 @@ export default new Vuex.Store({
     isLogin: false,
     cartList: [],
     categories: [],
-    messageSuccess: ''
+    messageSuccess: '',
+    messageError: ''
   },
   mutations: {
     set_Products (state, payload) {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     },
     set_messageSuccess (state, payload) {
       state.messageSuccess = payload
+    },
+    set_messageError (state, payload) {
+      state.messageError = payload
     }
   },
   actions: {
@@ -43,7 +47,6 @@ export default new Vuex.Store({
         method: 'get',
         url: baseUrl + 'products'
       }).then(({ data }) => {
-        // console.log(data.products, 'ini data fetchProduct')
         context.commit('set_Products', data.products)
       }).catch(err => {
         console.log(err)
@@ -54,7 +57,6 @@ export default new Vuex.Store({
         method: 'get',
         url: baseUrl + 'categories'
       }).then(({ data }) => {
-        // console.log(data.Categories, 'ini data fetchCategory')
         context.commit('set_category', data.Categories)
       }).catch(err => {
         console.log(err)
@@ -81,11 +83,10 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          // console.log(data, 'ini fetchCart')
           context.commit('set_Cart', data.cart)
         })
         .catch(err => {
-          console.log(err.response)
+          context.commit('set_messageError', err.response.data.message)
         })
     },
     fetchHistory (context, payload) {
@@ -97,11 +98,10 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          // console.log(data, 'ini fetchHistory')
           context.commit('set_Cart', data.cart)
         })
         .catch(err => {
-          console.log(err.response)
+          context.commit('set_messageError', err.response.data.message)
         })
     },
     deleteCart (context, payload) {

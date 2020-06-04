@@ -1,4 +1,8 @@
 # cms_customer
+### HostingURL
+```
+https://customer-client-76048.web.app
+```
 
 ## Project setup
 ```

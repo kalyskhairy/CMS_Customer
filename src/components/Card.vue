@@ -54,7 +54,6 @@ export default {
       }
       this.$store.dispatch('deleteCart', payload)
         .then(({ data }) => {
-        //   console.log(data, 'delete Cart')
           this.message = data.message
           this.$store.commit('set_deleteCart', Cart)
           setTimeout(() => {
@@ -62,7 +61,6 @@ export default {
           }, 1500)
         })
         .catch(err => {
-        //   console.log(err.response)
           setTimeout(() => {
             this.message = ''
           }, 2000)
@@ -70,7 +68,6 @@ export default {
         })
     },
     buyCart (Cart) {
-      console.log(Cart.id)
       const payload = {
         token: localStorage.getItem('token'),
         id: Cart.id,
@@ -78,7 +75,6 @@ export default {
       }
       this.$store.dispatch('updateCart', payload)
         .then(({ data }) => {
-          console.log(data.Cart)
           setTimeout(() => {
             this.$store.commit('set_messageSuccess', '')
           }, 2000)
@@ -86,7 +82,10 @@ export default {
           this.$store.commit('set_deleteCart', Cart)
         })
         .catch(err => {
-          console.log(err.response)
+          setTimeout(() => {
+            this.message = ''
+          }, 2000)
+          this.message = err.response.data.message
         })
     }
   }

@@ -61,7 +61,7 @@
 </template>
 <script>
 import axios from 'axios'
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://lit-badlands-37387.herokuapp.com/'
 
 export default {
   name: 'Login',
@@ -78,7 +78,7 @@ export default {
       this.$router.push({ name: 'Register' })
     },
     Login () {
-      axios.post(`${baseUrl}/users/`, {
+      axios.post(`${baseUrl}users/`, {
         email: this.email,
         password: this.password
       })
@@ -91,7 +91,6 @@ export default {
           this.password = ''
         })
         .catch(err => {
-          // console.log(err.response.data)
           setTimeout(() => {
             this.message = ''
           }, 2000)

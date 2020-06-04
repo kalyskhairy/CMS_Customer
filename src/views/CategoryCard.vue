@@ -50,10 +50,8 @@ export default {
         ProductId: id,
         token: localStorage.getItem('token')
       }
-      // console.log(payload, 'ini payload')
       this.$store.dispatch('AddCart', payload)
         .then(({ data }) => {
-          // console.log(data, 'ini data')
           setTimeout(() => {
             this.message = ''
           }, 2000)
@@ -62,7 +60,6 @@ export default {
           this.cardId = id
         })
         .catch(err => {
-          // console.log(err.response)
           setTimeout(() => {
             this.message = ''
           }, 2000)
@@ -78,7 +75,6 @@ export default {
           category = this.$store.state.categories[i]
         }
       }
-      // console.log(category)
       return category
     },
     isLogin () {
@@ -86,7 +82,6 @@ export default {
     }
   },
   created () {
-    // console.log(this.$route)
   }
 }
 </script>

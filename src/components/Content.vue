@@ -62,15 +62,12 @@ export default {
   },
   methods: {
     addCart (id) {
-      // console.log(id)
       const payload = {
         ProductId: id,
         token: localStorage.getItem('token')
       }
-      // console.log(payload, 'ini payload')
       this.$store.dispatch('AddCart', payload)
         .then(({ data }) => {
-          // console.log(data, 'ini data')
           setTimeout(() => {
             this.message = ''
           }, 2000)
@@ -79,7 +76,6 @@ export default {
           this.cardId = id
         })
         .catch(err => {
-          // console.log(err.response)
           setTimeout(() => {
             this.message = ''
           }, 2000)
